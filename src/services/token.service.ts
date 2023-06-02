@@ -1,6 +1,6 @@
 import jwt, { Secret } from "jsonwebtoken";
 
-const generateAuthToken = async function (user: any) {
+const generateAuthToken = function (user: any) {
   const payload = {
     user: user,
   };
@@ -12,6 +12,16 @@ const generateAuthToken = async function (user: any) {
   return token;
 };
 
+const verifyToken = function (token: string) {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    return decoded;
+  } catch (error) {
+    throw new Error("Invalid token");
+  }
+};
+
 export default {
   generateAuthToken,
+  verifyToken,
 };

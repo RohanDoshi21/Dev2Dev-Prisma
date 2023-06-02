@@ -43,7 +43,17 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const profile = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.body.user;
+    res.status(httpStatus.OK).send({ data: user });
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: error });
+  }
+};
+
 export default {
   register,
   login,
+  profile,
 };
