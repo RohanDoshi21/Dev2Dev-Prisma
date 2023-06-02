@@ -11,19 +11,87 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   first_name   String
   last_name    String
-  email       String   @unique
-  password    String
+  email        String   @unique
+  password     String
   phone_number String
-  dpUrl       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  role        Role     @default(USER)
+  dpUrl        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  role         Role     @default(USER)
+
+  questions     Question[]
+  answers       Answer[]
+  questionVotes QuestionVotes[]
+  answerVotes   AnswerVotes[]
 }
 
 enum Role {
   USER
   MODERATOR
+}
+
+model Question {
+  id          Int           @id @default(autoincrement())
+  title       String
+  description String
+  ownerId     Int
+  upvotes     Int?          @default(0)
+  downvotes   Int?          @default(0)
+  created_at  DateTime?     @default(now())
+  status      StatusStates? @default(OPEN)
+  tag         String[]
+
+  questionVotes QuestionVotes[]
+  answers       Answer[]
+
+  owner User @relation(fields: [ownerId], references: [id])
+}
+
+enum StatusStates {
+  OPEN
+  CLOSED
+  BANNED
+}
+
+model Answer {
+  id          Int       @id @default(autoincrement())
+  description String
+  ownerId     Int
+  question_id Int
+  upvotes     Int?      @default(0)
+  downvotes   Int?      @default(0)
+  created_at  DateTime? @default(now())
+
+  owner       User          @relation(fields: [ownerId], references: [id])
+  question    Question      @relation(fields: [question_id], references: [id])
+  answerVotes AnswerVotes[]
+}
+
+model QuestionVotes {
+  id          Int      @default(autoincrement())
+  status      Int
+  owner       Int
+  question_id Int
+  created_at  DateTime @default(now())
+
+  ownerUser User     @relation(fields: [owner], references: [id])
+  question  Question @relation(fields: [question_id], references: [id])
+
+  @@id([owner, question_id])
+}
+
+model AnswerVotes {
+  id         Int      @default(autoincrement())
+  status     Int
+  owner      Int
+  answer_id  Int
+  created_at DateTime @default(now())
+
+  ownerUser User   @relation(fields: [owner], references: [id])
+  answer    Answer @relation(fields: [answer_id], references: [id])
+
+  @@id([owner, answer_id])
 }
