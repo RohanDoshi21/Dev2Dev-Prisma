@@ -6,7 +6,7 @@ import authRouter from "./routes/auth.route";
 dotenv.config();
 
 if (!process.env.PORT) {
-    process.exit(1);
+  process.exit(1);
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
@@ -19,13 +19,11 @@ app.use(express.json());
 // Routes
 app.use("/auth", authRouter);
 
-
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+  console.log(`Listening on port ${PORT}`);
 });
 
 // Test route
 app.get("/ping", (req, res) => {
-    res.send("pong");
+  res.send("pong");
 });
-
