@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.route";
 import questionRouter from "./routes/question.route";
 import answerRouter from "./routes/answer.route";
 import tagRouter from "./routes/tag.route";
+import voteRouter from "./routes/vote.route";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use("/auth", authRouter);
 app.use("/questions", questionRouter);
 app.use("/answers", answerRouter);
 app.use("/tags", tagRouter);
+app.use("/votes", voteRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
