@@ -13,8 +13,6 @@ const getTagList = async () => {
     // Remove duplicate tags
     const uniqueTagList = [...new Set(allTags)];
 
-    console.log(uniqueTagList);
-
     return uniqueTagList;
   } catch (error) {
     throw error;

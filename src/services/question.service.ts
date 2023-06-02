@@ -163,6 +163,17 @@ const deleteQuestion = async (questionId: number) => {
 
     return deletedQuestion;
   } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const retrieveTotalPages = async () => {
+  try {
+    const totalQuestions = await db.question.count();
+    const totalPages = Math.ceil(totalQuestions / 10);
+    return totalPages;
+  } catch (error) {
     throw error;
   }
 };
@@ -174,4 +185,5 @@ export default {
   createQuestion,
   updateQuestion,
   deleteQuestion,
+  retrieveTotalPages,
 };

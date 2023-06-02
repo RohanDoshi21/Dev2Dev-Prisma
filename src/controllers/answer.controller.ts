@@ -18,7 +18,7 @@ const createAnswer = async (req: Request, res: Response) => {
     const answer = await AnswerService.createAnswer(
       req.body.description,
       req.body.user.id,
-      req.body.question
+      parseInt(req.body.question)
     );
 
     res.status(200).json({ data: { answer } });

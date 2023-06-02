@@ -66,7 +66,7 @@ model Answer {
   created_at  DateTime? @default(now())
 
   owner       User          @relation(fields: [ownerId], references: [id])
-  question    Question      @relation(fields: [question_id], references: [id])
+  question    Question      @relation(fields: [question_id], references: [id], onDelete: Cascade)
   answerVotes AnswerVotes[]
 }
 
@@ -78,7 +78,7 @@ model QuestionVotes {
   created_at  DateTime @default(now())
 
   ownerUser User     @relation(fields: [owner], references: [id])
-  question  Question @relation(fields: [question_id], references: [id])
+  question  Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
 
   @@id([owner, question_id])
 }
@@ -91,7 +91,7 @@ model AnswerVotes {
   created_at DateTime @default(now())
 
   ownerUser User   @relation(fields: [owner], references: [id])
-  answer    Answer @relation(fields: [answer_id], references: [id])
+  answer    Answer @relation(fields: [answer_id], references: [id], onDelete: Cascade)
 
   @@id([owner, answer_id])
 }

@@ -1,16 +1,15 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import QuestionService from "../services/question.service";
+import { log } from "console";
 
 const retrieveQuestions = async (req: Request, res: Response) => {
   try {
     const page =
-      req.query.page !== undefined ? parseInt(req.query.page.toString()) : 0;
+      req.query.page !== undefined ? parseInt(req.query.page.toString()) : 1;
     const sortType =
       req.query.sort !== undefined ? req.query.sort.toString() : "most_recent";
 
     const questions = await QuestionService.retrieveQuestions(page, sortType);
-
-    console.log(page, sortType);
 
     res.status(200).json({ data: { questions } });
   } catch (error) {
@@ -87,6 +86,16 @@ const deleteQuestion = async (req: Request, res: Response) => {
   }
 };
 
+const retrieveTotalPages = async (req: Request, res: Response) => {
+  try {
+    const totalPages = await QuestionService.retrieveTotalPages();
+
+    res.status(200).json({ data: { totalPages } });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
 export default {
   retrieveQuestions,
   retrieveMyQuestions,
@@ -94,4 +103,5 @@ export default {
   createQuestion,
   updateQuestion,
   deleteQuestion,
+  retrieveTotalPages,
 };

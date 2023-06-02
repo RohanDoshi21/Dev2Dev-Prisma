@@ -16,6 +16,8 @@ router.get(
 
 router.get("/:id", QuestionController.retrieveQuestionById);
 
+router.post("/total_pages", QuestionController.retrieveTotalPages);
+
 router.post("/", auth.verifyUser, QuestionController.createQuestion);
 
 router.put("/:id", auth.verifyUser, QuestionController.updateQuestion);
