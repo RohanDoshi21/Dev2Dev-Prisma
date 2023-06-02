@@ -1,12 +1,31 @@
-import { PrismaClient } from '@prisma/client';
+import * as dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import authRouter from "./routes/auth.route";
 
-const prisma = new PrismaClient();
+dotenv.config();
 
-async function main() {
-    const users = await prisma.user.findMany();
-    console.log(users);
+if (!process.env.PORT) {
+    process.exit(1);
 }
 
-main()
-    .catch((e) => console.error(e))
-    .finally(() => prisma.$disconnect());
+const PORT: number = parseInt(process.env.PORT as string, 10);
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use("/auth", authRouter);
+
+
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+});
+
+// Test route
+app.get("/ping", (req, res) => {
+    res.send("pong");
+});
+
