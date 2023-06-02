@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import authRouter from "./routes/auth.route";
 import questionRouter from "./routes/question.route";
+import answerRouter from "./routes/answer.route";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 // Routes
 app.use("/auth", authRouter);
 app.use("/questions", questionRouter);
+app.use("/answers", answerRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
