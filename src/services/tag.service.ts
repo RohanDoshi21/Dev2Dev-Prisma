@@ -26,6 +26,13 @@ const getQuestionsByTag = async (tag: string) => {
           has: tag,
         },
       },
+      include: {
+        owner: {
+          select: {
+            email: true,
+          },
+        },
+      },
     });
 
     return questions;

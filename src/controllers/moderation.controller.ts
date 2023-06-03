@@ -10,7 +10,6 @@ const addModerator = async (req: Request, res: Response) => {
     if (!user) {
       throw new Error("User not found");
     }
-    console.log(user);
     if (user.role == "MODERATOR") {
       throw new Error("User is already a moderator");
     }

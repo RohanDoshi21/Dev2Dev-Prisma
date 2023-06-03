@@ -13,13 +13,19 @@ const login = async (email: string, password: string) => {
     if (!isMatch) {
       throw "Password incorrect";
     }
+    const userCopy = { ...user };
+    exclude(userCopy, ["password"]);
+
     const userWithoutPassword = exclude(user, [
       "password",
       "createdAt",
       "updatedAt",
+      "dpUrl",
     ]);
+
+    console.log(userCopy);
     const token = await TokenServices.generateAuthToken(userWithoutPassword);
-    return [user, token];
+    return [userCopy, token];
   } catch (error) {
     throw error;
   }

@@ -15,7 +15,11 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
       last_name,
       phone_number
     );
-    const userWithoutPassword = exclude(user, ["createdAt", "updatedAt"]);
+    const userWithoutPassword = exclude(user, [
+      "createdAt",
+      "updatedAt",
+      "dpUrl",
+    ]);
     const token = await TokenServices.generateAuthToken(userWithoutPassword);
     res
       .status(httpStatus.CREATED)

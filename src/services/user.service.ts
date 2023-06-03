@@ -1,6 +1,7 @@
 import { db } from "../utils/db.server";
 import { encryptPassword } from "../utils/encryption";
 import exclude from "../utils/utils";
+import generateAvatar from "../utils/avatar";
 
 const createUser = async (
   email: string,
@@ -13,6 +14,7 @@ const createUser = async (
     if (await getUserByEmail(email)) {
       throw "Email already taken";
     }
+    const dpUrl = await generateAvatar(`${first_name[0]}${last_name[0]}`);
     const user = await db.user.create({
       data: {
         email,
@@ -20,6 +22,7 @@ const createUser = async (
         first_name,
         last_name,
         phone_number,
+        dpUrl,
       },
     });
     return exclude(user, ["password"]);
