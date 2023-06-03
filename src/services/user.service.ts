@@ -58,8 +58,33 @@ const updateUser = async (id: number, user: any) => {
   }
 };
 
+const getUserById = async (id: number) => {
+  try {
+    const user = await db.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getAllUsers = async () => {
+  try {
+    const users = await db.user.findMany();
+    return users;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   createUser,
   getUserByEmail,
   updateUser,
+  getUserById,
+  getAllUsers,
 };

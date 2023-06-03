@@ -1,5 +1,5 @@
 import express from "express";
-import expressController from "../controllers/express.controller";
+import moderationController from "../controllers/moderation.controller";
 import auth from "../middlewares/auth";
 
 const router = express.Router();
@@ -8,14 +8,14 @@ const router = express.Router();
 router.post(
   "/make_moderator",
   auth.verifyModerator,
-  expressController.addModerator
+  moderationController.addModerator
 );
 
 // STATUS -> OPEN / CLOSED
 router.patch(
   "/change_status",
   auth.verifyModerator,
-  expressController.changeStatus
+  moderationController.changeStatus
 );
 
 export default router;
