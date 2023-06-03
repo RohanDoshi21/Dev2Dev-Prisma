@@ -142,8 +142,7 @@ const updateQuestion = async (questionId: number, question: any) => {
         id: questionId,
       },
       data: {
-        title: question.title,
-        description: question.description,
+        ...question,
       },
     });
 
@@ -178,6 +177,23 @@ const retrieveTotalPages = async () => {
   }
 };
 
+const getQuestionStatusById = async (questionId: number) => {
+    try {
+        const question = await db.question.findUnique({
+            where: {
+                id: questionId,
+            },
+            select: {
+                id: true,
+                status: true,
+            },
+        });
+        return question;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export default {
   retrieveQuestions,
   retrieveMyQuestions,
@@ -186,4 +202,5 @@ export default {
   updateQuestion,
   deleteQuestion,
   retrieveTotalPages,
+  getQuestionStatusById
 };

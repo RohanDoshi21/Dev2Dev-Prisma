@@ -22,9 +22,9 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
       .send({ data: { user: userWithoutPassword, token } });
   } catch (error) {
     if (error == "Email already taken") {
-      res.status(httpStatus.BAD_REQUEST).send({ message: error });
+      res.status(httpStatus.BAD_REQUEST).send({ error: error });
     } else {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: error });
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error });
     }
   }
 };
@@ -36,9 +36,9 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     res.status(httpStatus.OK).send({ data: { user, token } });
   } catch (error) {
     if (error == "Email not found" || error == "Password incorrect") {
-      res.status(httpStatus.BAD_REQUEST).send({ message: error });
+      res.status(httpStatus.BAD_REQUEST).send({ error: error });
     } else {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: error });
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error });
     }
   }
 };
@@ -48,7 +48,7 @@ const profile = async (req: Request, res: Response, next: NextFunction) => {
     const user = req.body.user;
     res.status(httpStatus.OK).send({ data: user });
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: error });
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error });
   }
 };
 

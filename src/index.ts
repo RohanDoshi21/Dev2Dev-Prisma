@@ -7,6 +7,7 @@ import answerRouter from "./routes/answer.route";
 import tagRouter from "./routes/tag.route";
 import voteRouter from "./routes/vote.route";
 import searchRouter from "./routes/search.route";
+import moderationRouter from "./routes/moderation.route";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use("/answers", answerRouter);
 app.use("/tags", tagRouter);
 app.use("/votes", voteRouter);
 app.use("/search", searchRouter);
+app.use("/moderation", moderationRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

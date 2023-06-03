@@ -23,7 +23,11 @@ const createAnswer = async (req: Request, res: Response) => {
 
     res.status(200).json({ data: { answer } });
   } catch (error) {
-    res.status(500).json({ error: error });
+    const errorMessage = (error as Error).name;
+      if (errorMessage == "PrismaClientUnknownRequestError") {
+        res.status(401).json({ error: 'Cannot add answer to a closed question' });
+    }
+    res.status(500).json({ error: errorMessage });
   }
 };
 
