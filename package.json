@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
     "lint": "eslint . --ext .ts",
-    "start": "tsc && node src/index.ts"
+    "start": "tsc && node build/index.js",
+    "tsc": "tsc",
+    "start:prod": "node build/index.js"
   },
   "keywords": [],
   "author": "",
