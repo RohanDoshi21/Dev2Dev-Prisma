@@ -1,4 +1,5 @@
 import { db } from "../utils/db.server";
+import sendEmailToOwner from "./notify.service";
 
 const retrieveAnswerForQuestion = async (questionId: number) => {
   try {
@@ -34,6 +35,8 @@ const createAnswer = async (
         question_id: questionId,
       },
     });
+
+    sendEmailToOwner(description, questionId);
 
     return newAnswer;
   } catch (error) {
