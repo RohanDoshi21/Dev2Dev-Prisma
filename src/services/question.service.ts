@@ -178,20 +178,20 @@ const retrieveTotalPages = async () => {
 };
 
 const getQuestionStatusById = async (questionId: number) => {
-    try {
-        const question = await db.question.findUnique({
-            where: {
-                id: questionId,
-            },
-            select: {
-                id: true,
-                status: true,
-            },
-        });
-        return question;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const question = await db.question.findUnique({
+      where: {
+        id: questionId,
+      },
+      select: {
+        id: true,
+        status: true,
+      },
+    });
+    return question;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default {
@@ -202,5 +202,5 @@ export default {
   updateQuestion,
   deleteQuestion,
   retrieveTotalPages,
-  getQuestionStatusById
+  getQuestionStatusById,
 };

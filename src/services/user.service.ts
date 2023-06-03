@@ -41,21 +41,21 @@ const getUserByEmail = async (email: string) => {
   }
 };
 
-const updateUser = async ( id: number, user: any) => {
-    try {
-        const updatedUser = await db.user.update({
-            where: {
-                id,
-            },
-            data: {
-                ...user,
-            },
-        });
-        return updatedUser;
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+const updateUser = async (id: number, user: any) => {
+  try {
+    const updatedUser = await db.user.update({
+      where: {
+        id,
+      },
+      data: {
+        ...user,
+      },
+    });
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };
 
 export default {
