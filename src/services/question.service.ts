@@ -46,41 +46,13 @@ const retrieveQuestions = async (page: number, sortType: string) => {
 };
 
 const retrieveMyQuestions = async (
-  ownerId: number,
-  page: number,
-  sortType: string
+  ownerId: number
 ) => {
   try {
-    const offset = 10;
-    var orderBy = {};
-
-    if (sortType === "most_recent") {
-      orderBy = {
-        created_at: "desc",
-      };
-    } else if (sortType === "oldest") {
-      orderBy = {
-        created_at: "asc",
-      };
-    } else if (sortType === "most_upvoted") {
-      orderBy = {
-        upvotes: "desc",
-      };
-    } else if (sortType === "most_answered") {
-      orderBy = {
-        answers: {
-          _count: "desc",
-        },
-      };
-    }
-
     const questions = await db.question.findMany({
       where: {
         ownerId: ownerId,
       },
-      skip: (page - 1) * offset,
-      take: offset,
-      orderBy: orderBy,
       include: {
         owner: {
           select: {

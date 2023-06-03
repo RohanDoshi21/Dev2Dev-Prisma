@@ -9,7 +9,7 @@ router.get("/", QuestionController.retrieveQuestions);
 
 // SORT TYPES: most_recent, most_answered, most_upvoted, oldest && page
 router.get(
-  "/my_questions/:id/",
+  "/my_questions",
   auth.verifyUser,
   QuestionController.retrieveMyQuestions
 );

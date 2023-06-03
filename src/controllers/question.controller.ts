@@ -19,16 +19,7 @@ const retrieveQuestions = async (req: Request, res: Response) => {
 
 const retrieveMyQuestions = async (req: Request, res: Response) => {
   try {
-    const page =
-      req.query.page !== undefined ? parseInt(req.query.page.toString()) : 0;
-    const sortType =
-      req.query.sort !== undefined ? req.query.sort.toString() : "most_recent";
-
-    const questions = await QuestionService.retrieveMyQuestions(
-      req.body.user.id,
-      page,
-      sortType
-    );
+    const questions = await QuestionService.retrieveMyQuestions(req.body.user.id);
 
     res.status(200).json({ data: { questions } });
   } catch (error) {
