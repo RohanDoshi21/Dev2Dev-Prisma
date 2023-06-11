@@ -1,22 +1,45 @@
-## Dev2Dev Backend
+<h1 align="center">Welcome to Dev 2 Dev</h1>
 
-### Setup
+> Dev 2 Dev is a forum for asking company specific questions. So that your internal knowledge can be kept within your company.
+> This is the Backend for the Dev 2 Dev project. It is built using NodeJs, Express, Postgres, Prisma.
+Link to the backend: https://github.com/RohanDoshi21/Dev2Dev-Frontend
 
-1. Prisma Useful
+### 🏠 [Homepage](https://dev-2-dev.vercel.app/) https://dev-2-dev.vercel.app/
 
-```bash
-prisma generate
+###  📘 [Documentation](https://documenter.getpostman.com/view/19071589/2s93sc5sex#7cdd83a5-ef2e-493f-9936) (Postman Documentation)
 
-prisma migrate
+## Install
 
-prisma studio
+```sh
+npm install
 
-prisma migrate dev --name init --preview-feature
+# Prisma setup
+npx prisma generate
+npx prisma migrate dev
 ```
 
-2. Triggers -> Add triggers to Postgres
-   -> Connect using docker
+## Usage
 
-```bash
-docker exec -it postgresdb-image-name psql -U postgres -W db-name
+```sh
+npm run dev
+
+# Prisma
+npx prisma studio
+
+# Postgres Docker Container
+docker compose -f "docker-compose.only-db-test.yml" up -d --build
 ```
+
+## Author
+
+👤 **Rohan Doshi**
+
+* Github: [@RohanDoshi21](https://github.com/RohanDoshi21)
+
+👤 **Samarth Kamble**
+
+* Github: [@Samarth7212](https://github.com/Samarth7212)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
