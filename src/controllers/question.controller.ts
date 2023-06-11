@@ -19,7 +19,9 @@ const retrieveQuestions = async (req: Request, res: Response) => {
 
 const retrieveMyQuestions = async (req: Request, res: Response) => {
   try {
-    const questions = await QuestionService.retrieveMyQuestions(req.body.user.id);
+    const questions = await QuestionService.retrieveMyQuestions(
+      req.body.user.id
+    );
 
     res.status(200).json({ data: { questions } });
   } catch (error) {

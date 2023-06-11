@@ -40,7 +40,6 @@ const createAnswer = async (
 
     return newAnswer;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };

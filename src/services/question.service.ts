@@ -45,9 +45,7 @@ const retrieveQuestions = async (page: number, sortType: string) => {
   }
 };
 
-const retrieveMyQuestions = async (
-  ownerId: number
-) => {
+const retrieveMyQuestions = async (ownerId: number) => {
   try {
     const questions = await db.question.findMany({
       where: {
