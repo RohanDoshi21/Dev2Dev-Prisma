@@ -23,7 +23,6 @@ const login = async (email: string, password: string) => {
       "dpUrl",
     ]);
 
-    console.log(userCopy);
     const token = await TokenServices.generateAuthToken(userWithoutPassword);
     return [userCopy, token];
   } catch (error) {

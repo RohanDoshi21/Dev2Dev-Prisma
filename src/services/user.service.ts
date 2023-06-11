@@ -67,6 +67,9 @@ const getUserById = async (id: number) => {
       where: {
         id,
       },
+      include: {
+        questions: true,
+      },
     });
 
     return user;
