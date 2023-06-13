@@ -95,8 +95,6 @@ const addComponent = async (req: Request, res: Response) => {
     const componentType = req.body.componentType;
     const content = req.body.content;
 
-    console.log(questionId);
-
     const newComponent = await ComponentService.addComponent(
       questionId,
       componentType,
@@ -105,6 +103,7 @@ const addComponent = async (req: Request, res: Response) => {
 
     res.status(200).json({ data: { newComponent } });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error });
   }
 };
