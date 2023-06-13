@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import QuestionService from "../services/question.service";
-import { log } from "console";
+import ComponentService from "../services/component.service";
 
 const retrieveQuestions = async (req: Request, res: Response) => {
   try {
@@ -89,6 +89,26 @@ const retrieveTotalPages = async (req: Request, res: Response) => {
   }
 };
 
+const addComponent = async (req: Request, res: Response) => {
+  try {
+    const questionId = req.body.questionId;
+    const componentType = req.body.componentType;
+    const content = req.body.content;
+
+    console.log(questionId);
+
+    const newComponent = await ComponentService.addComponent(
+      questionId,
+      componentType,
+      content
+    );
+
+    res.status(200).json({ data: { newComponent } });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
 export default {
   retrieveQuestions,
   retrieveMyQuestions,
@@ -97,4 +117,5 @@ export default {
   updateQuestion,
   deleteQuestion,
   retrieveTotalPages,
+  addComponent,
 };

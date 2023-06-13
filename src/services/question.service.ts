@@ -66,10 +66,10 @@ const retrieveMyQuestions = async (ownerId: number) => {
   }
 };
 
-const retrieveQuestionById = async (quesetionId: number) => {
+const retrieveQuestionById = async (questionId: number) => {
   const question = await db.question.findUnique({
     where: {
-      id: quesetionId,
+      id: questionId,
     },
     include: {
       owner: {
@@ -77,6 +77,7 @@ const retrieveQuestionById = async (quesetionId: number) => {
           email: true,
         },
       },
+      questionComponents: true,
     },
   });
 

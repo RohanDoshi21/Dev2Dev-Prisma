@@ -24,4 +24,7 @@ router.put("/:id", auth.verifyUser, QuestionController.updateQuestion);
 
 router.delete("/:id", auth.verifyUser, QuestionController.deleteQuestion);
 
+// For IMAGE and VIDEO, provide the url of the image or video in the content field
+router.post("/add_component", auth.verifyUser, QuestionController.addComponent);
+
 export default router;

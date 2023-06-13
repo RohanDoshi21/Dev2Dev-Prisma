@@ -45,8 +45,9 @@ model Question {
   status      StatusStates? @default(OPEN)
   tag         String[]
 
-  questionVotes QuestionVotes[]
-  answers       Answer[]
+  questionVotes      QuestionVotes[]
+  answers            Answer[]
+  questionComponents QuestionComponents[]
 
   owner User @relation(fields: [ownerId], references: [id])
 }
@@ -95,4 +96,23 @@ model AnswerVotes {
   answer    Answer @relation(fields: [answer_id], references: [id], onDelete: Cascade)
 
   @@id([owner, answer_id])
+}
+
+enum ComponentType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+}
+
+model QuestionComponents {
+  id          Int           @default(autoincrement())
+  question_id Int
+  component   ComponentType
+  content     String
+  created_at  DateTime      @default(now())
+
+  question Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
+
+  @@id([question_id, component])
 }
