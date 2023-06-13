@@ -25,8 +25,14 @@ const retrieveQuestions = async (page: number, sortType: string) => {
       };
     }
 
+    let skip = (page - 1) * offset;
+
+    if (isNaN(skip)) {
+      skip = 0;
+    }
+
     const questions = await db.question.findMany({
-      skip: (page - 1) * offset,
+      skip: skip,
       take: offset,
       orderBy: orderBy,
       include: {
